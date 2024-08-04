@@ -9,6 +9,10 @@
     .input {
         @apply px-3 py-2 rounded-md bg-b-1 focus:outline-none focus:border-none transition-all duration-300
     }
+
+    .btn {
+        @apply px-4 py-2 bg-b-1 hover:bg-b-2/50 rounded-md transition-all duration-200 flex items-center justify-center
+    }
 }
 
 .bg-gradient {

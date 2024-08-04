@@ -1,9 +1,34 @@
 import React from "react"
-import SearchSvg from "../svg/SearchSvg"
+import toast from "react-hot-toast"
 import { NavLink } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+
+// Files
+import SearchSvg from "../svg/SearchSvg"
+import { logout } from "../store/features/userSlice"
 
 const Header = () => {
-  const isLogedin = false
+  const { user } = useSelector((state) => state.user)
+
+  const dispatch = useDispatch()
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/v1/auth/logout")
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        return toast.error(data.message)
+      }
+
+      toast.success(data.message)
+      dispatch(logout())
+    } catch (e) {
+      console.log("Error in logout: ", e.message)
+    }
+  }
+
   return (
     <div className="w-full px-4 py-5 border-b border-b-2 flex justify-between items-center backdrop-blur-lg sticky top-0 right-0">
       <label className="w-fit h-fit relative">
@@ -15,19 +40,32 @@ const Header = () => {
         />
       </label>
       <div className="flex gap-3">
-        {isLogedin && <NavLink>Your Work</NavLink>}
-        <NavLink
-          to="/signin"
-          className="px-4 py-2 bg-g rounded-md hover:bg-g/60 hover:text-w text-black transition-all duration-200"
-        >
-          Sign In
-        </NavLink>
-        <NavLink
-          to="/login"
-          className="px-4 py-2 bg-b-1 hover:bg-b-2/50 rounded-md transition-all duration-200"
-        >
-          Log In
-        </NavLink>
+        {user ? (
+          <>
+            <NavLink className="btn">Your Work</NavLink>
+            <button
+              onClick={handleLogout}
+              className="btn"
+            >
+              Log In
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/signin"
+              className="btn !bg-g rounded-md hover:!bg-g/60 hover:!text-w !text-black"
+            >
+              Sign In
+            </NavLink>
+            <NavLink
+              to="/login"
+              className="btn"
+            >
+              Log In
+            </NavLink>
+          </>
+        )}
       </div>
     </div>
   )

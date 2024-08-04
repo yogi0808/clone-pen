@@ -11,6 +11,11 @@ import Home from "./pages/Home.jsx"
 import store from "./store/store.js"
 import ProjectPage from "./pages/ProjectPage.jsx"
 import AppContextProvider from "./store/appContext.jsx"
+import ProtectRoutes from "./components/ProtectRoutes.jsx"
+import PublicPens from "./pages/PublicPens.jsx"
+import Register from "./pages/Register.jsx"
+import Login from "./pages/Login.jsx"
+import ProtectRoutesFromLoggedIn from "./components/ProtectRoutesFromLoggedIn.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -19,10 +24,27 @@ const router = createBrowserRouter(
       element={<App />}
     >
       <Route
-        path="/"
-        index={true}
+        path=""
         element={<Home />}
-      />
+      >
+        <Route
+          path="/"
+          element={<PublicPens />}
+        />
+        <Route
+          path=""
+          element={<ProtectRoutesFromLoggedIn />}
+        >
+          <Route
+            path="/signin"
+            element={<Register />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+        </Route>
+      </Route>
       <Route
         path="/pen"
         element={<ProjectPage />}

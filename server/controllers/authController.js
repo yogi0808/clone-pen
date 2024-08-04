@@ -31,7 +31,15 @@ export const register = async (req, res) => {
 
         await generateToken(newUser._id, res)
 
-        res.status(200).json({ message: "User Registered Successfully.", user: newUser })
+
+
+        res.status(200).json({
+            message: "User Registered Successfully.", user: {
+                id: newUser._id,
+                username: newUser.username,
+                email: newUser.email
+            }
+        })
     } catch (e) {
         console.log("Error in register Controller: ", e.message)
         res.status(500).json({ message: "Internal server Error." })
@@ -60,10 +68,28 @@ export const login = async (req, res) => {
 
         await generateToken(user._id, res)
 
-        res.status(200).json({ message: "User LoggedIn Successfully." })
+        res.status(200).json({
+            message: "User LoggedIn Successfully.", user: {
+                id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        })
 
     } catch (e) {
         console.log("Error in login Controller: ", e.message)
+        res.status(500).json({ message: "Internal server Error." })
+    }
+}
+
+export const logout = async (req, res) => {
+    try {
+
+        res.cookie("jwt", "", { maxAge: 0 })
+        return res.status(200).json({ message: "Logged out successfully." })
+
+    } catch (e) {
+        console.log("Error in logout Controller: ", e.message)
         res.status(500).json({ message: "Internal server Error." })
     }
 }
