@@ -9,12 +9,11 @@ import "./index.css"
 import App from "./App.jsx"
 import Home from "./pages/Home.jsx"
 import store from "./store/store.js"
-import ProjectPage from "./pages/ProjectPage.jsx"
-import AppContextProvider from "./store/appContext.jsx"
-import ProtectRoutes from "./components/ProtectRoutes.jsx"
-import PublicPens from "./pages/PublicPens.jsx"
-import Register from "./pages/Register.jsx"
 import Login from "./pages/Login.jsx"
+import Register from "./pages/Register.jsx"
+import PublicPens from "./pages/PublicPens.jsx"
+import ProjectPage from "./pages/ProjectPage.jsx"
+import ProtectRoutes from "./components/ProtectRoutes.jsx"
 import ProtectRoutesFromLoggedIn from "./components/ProtectRoutesFromLoggedIn.jsx"
 
 const router = createBrowserRouter(
@@ -55,10 +54,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppContextProvider>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </AppContextProvider>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 )

@@ -47,7 +47,7 @@ const Header = () => {
               onClick={handleLogout}
               className="btn"
             >
-              Log In
+              Log Out
             </button>
           </>
         ) : (

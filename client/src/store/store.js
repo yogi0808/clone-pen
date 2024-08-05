@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit"
-import projectReducer from "./features/projectSlice"
+
+// Files
 import userReducer from "./features/userSlice"
+import toggleReducer from "./features/toggleSlice"
+import projectReducer from "./features/projectSlice"
 
 const store = configureStore({
     reducer: {
         user: userReducer,
-        project: projectReducer
+        project: projectReducer,
+        toggle: toggleReducer
     }
 })
 

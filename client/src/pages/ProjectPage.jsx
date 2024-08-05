@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router"
 
 // Files
 import Header from "../components/new project page/Header"
 import Layout from "../components/new project page/Layout"
-import { useNavigate } from "react-router"
-import { useSelector } from "react-redux"
 
 const ProjectPage = () => {
   const { project } = useSelector((state) => state.project)
@@ -49,7 +49,7 @@ const ProjectPage = () => {
   return (
     <main className="w-screen h-screen flex-col flex items-start justify-start px-3 md:px-6">
       <Header />
-      {<Layout />}
+      <Layout />
     </main>
   )
 }

@@ -1,9 +1,8 @@
 import React from "react"
-import { useAppContext } from "../store/appContext"
+import { useSelector } from "react-redux"
 
 const LayoutSvg = () => {
-  const { layout } = useAppContext()
-
+  const { layout } = useSelector((state) => state.toggle)
   return (
     <svg
       width="20px"

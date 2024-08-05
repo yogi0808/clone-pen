@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     project: {
-        title: "",
+        title: "Untitled",
         description: "",
+        type: "public",
         html: "",
         css: "",
         js: ""
@@ -23,14 +24,16 @@ const projectSlice = createSlice({
         setJs: (state, action) => {
             state.project.js = action.payload
         },
-        setProjectTitle: (state, action) => {
-            state.project.title = action.payload
-        },
-        setProjectDesc: (state, action) => {
-            state.project.description = action.payload
+        setProjectData: (state, action) => {
+            state.project.title = action.payload.title || ""
+            state.project.description = action.payload.desc || ""
+            state.project.type = action.payload.type || "public"
+            state.project.html = action.payload.html || ""
+            state.project.css = action.payload.css || ""
+            state.project.js = action.payload.js || ""
         }
     }
 })
 
-export const { setCss, setHtml, setJs, setProjectDesc, setProjectTitle } = projectSlice.actions
+export const { setCss, setHtml, setJs, setProjectData } = projectSlice.actions
 export default projectSlice.reducer

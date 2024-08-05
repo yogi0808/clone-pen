@@ -2,31 +2,13 @@ import React from "react"
 
 // Files
 import LayoutSvg from "../../svg/LayoutSvg"
-import { useAppContext } from "../../store/appContext"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleLayout } from "../../store/features/toggleSlice"
 
 const Header = () => {
-  const { layout, setLayout } = useAppContext()
   const { project } = useSelector((state) => state.project)
 
-  const toggleLayout = () => {
-    switch (layout) {
-      case "top":
-        setLayout("right")
-        break
-      case "right":
-        setLayout("bottom")
-        break
-      case "bottom":
-        setLayout("left")
-        break
-      case "left":
-        setLayout("top")
-        break
-      default:
-        setLayout("left")
-    }
-  }
+  const dispatch = useDispatch()
 
   return (
     <div className="w-full py-3 flex justify-between">
@@ -35,7 +17,7 @@ const Header = () => {
       </h3>
       <button
         className="py-3 px-4 flex items-center justify-center bg-b-1 rounded-lg"
-        onClick={toggleLayout}
+        onClick={() => dispatch(toggleLayout())}
       >
         <LayoutSvg />
       </button>

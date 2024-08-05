@@ -1,7 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
-const SideBar = ({ setValue }) => {
+// Files
+import { togglePopup } from "../store/features/toggleSlice"
+
+const SideBar = () => {
+  const dispatch = useDispatch()
+
   return (
     <div className="flex flex-col px-3 py-3 bg-b-1 min-h-screen gap-3 sticky top-0 left-0">
       <Link
@@ -15,7 +21,7 @@ const SideBar = ({ setValue }) => {
       </span>
 
       <button
-        onClick={() => setValue(true)}
+        onClick={() => dispatch(togglePopup(true))}
         className="bg-gradient p-1 w-fit h-14 rounded-md"
       >
         <span className="bg-black h-full flex px-3 items-center justify-center text-sm rounded">

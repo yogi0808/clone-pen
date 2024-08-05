@@ -1,13 +1,13 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 
 // Files
 import Editor from "./Editor"
 import OutputSection from "./OutputSection"
-import { useAppContext } from "../../store/appContext"
 
 const Layout = () => {
-  const { layout } = useAppContext()
+  const { layout } = useSelector((state) => state.toggle)
 
   switch (layout) {
     case "left":
