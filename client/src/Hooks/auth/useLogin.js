@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import toast from "react-hot-toast"
+import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 
 // Files
-import { setUserData } from '../store/features/userSlice'
+import { setUserData } from '../../store/features/userSlice'
 
-const useRegister = () => {
+const useLogin = () => {
 
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
 
-    const register = async (userData) => {
+    const login = async (userData) => {
         setLoading(true)
         try {
 
@@ -18,7 +18,7 @@ const useRegister = () => {
 
             if (!isDataValid) return
 
-            const res = await fetch("/api/v1/auth", {
+            const res = await fetch("/api/v1/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -37,37 +37,27 @@ const useRegister = () => {
             toast.success(data.message)
 
         } catch (e) {
-            console.log("Error in register Hook: ", e.message)
+            console.log("Error in login Hook: ", e.message)
         } finally {
             setLoading(false)
         }
     }
 
-    return { loading, register }
+    return { loading, login }
 }
 
-export default useRegister
+export default useLogin
 
 const validateData = (data) => {
-    const { username, email, password, confirmPassword } = data
+    const { email, password } = data
 
-    if (!username || !email || !password || !confirmPassword) {
+    if (!email || !password) {
         toast.error("Provide valid Inputs.")
         return false
     }
 
-    if (username.length < 3) {
-        toast.error("Username must be at list 3 characters.")
-        return false
-    }
-
-    if (password.length < 4 || confirmPassword.length < 4) {
+    if (password.length < 4) {
         toast.error("Password must be at list 4 Characters.")
-        return false
-    }
-
-    if (password !== confirmPassword) {
-        toast.error("Password Do not mech.")
         return false
     }
 

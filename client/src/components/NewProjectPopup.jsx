@@ -4,27 +4,33 @@ import { useDispatch, useSelector } from "react-redux"
 
 // Files
 import CloseSvg from "../svg/CloseSvg"
+import useCreatePen from "../Hooks/pen/useCreatePen"
 import { togglePopup } from "../store/features/toggleSlice"
-import { setProjectData } from "../store/features/projectSlice"
+import Loader from "./Loader"
 
 const NewProjectPopup = () => {
   const { showNewProjectPopup } = useSelector((state) => state.toggle)
+
+  const { loading, createPen } = useCreatePen()
 
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
 
     const data = Object.fromEntries(formData)
 
-    dispatch(setProjectData(data))
+    const penId = await createPen(data)
+
+    if (!penId) return
+
     dispatch(togglePopup(false))
 
-    navigate("/pen")
+    navigate(`/pen/${penId}`)
   }
 
   return showNewProjectPopup ? (
@@ -63,7 +69,9 @@ const NewProjectPopup = () => {
           className="input"
           required
         />
-        <button className="btn hover:!bg-b-1/80">Create Project</button>
+        <button className="btn hover:!bg-b-1/80">
+          {loading ? <Loader /> : "Create Project"}
+        </button>
       </form>
     </div>
   ) : (

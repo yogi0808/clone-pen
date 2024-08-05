@@ -1,6 +1,6 @@
 import React from "react"
 import Loader from "../components/Loader"
-import useLogin from "../Hooks/useLogin"
+import useLogin from "../Hooks/auth/useLogin"
 
 const Login = () => {
   const { loading, login } = useLogin()
@@ -38,7 +38,7 @@ const Login = () => {
           className="btn hover:!bg-b-1/80"
           disabled={loading}
         >
-          {loading ? <Loader /> : "Register"}
+          {loading ? <Loader /> : "Log In"}
         </button>
       </form>
     </div>

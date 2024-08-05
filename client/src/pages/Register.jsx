@@ -1,5 +1,5 @@
 import React from "react"
-import useRegister from "../Hooks/useRegister"
+import useRegister from "../Hooks//auth/useRegister"
 import Loader from "../components/Loader"
 
 const Register = () => {
@@ -56,7 +56,7 @@ const Register = () => {
           className="btn hover:!bg-b-1/80"
           disabled={loading}
         >
-          {loading ? <Loader /> : "Register"}
+          {loading ? <Loader /> : "Sign In"}
         </button>
       </form>
     </div>

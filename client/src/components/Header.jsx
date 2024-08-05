@@ -30,7 +30,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full px-4 py-5 border-b border-b-2 flex justify-between items-center backdrop-blur-lg sticky top-0 right-0">
+    <div className="w-full px-4 py-5 border-b border-b-2 flex justify-between items-center backdrop-blur-lg sticky top-0 right-0 z-50">
       <label className="w-fit h-fit relative">
         <SearchSvg />
         <input

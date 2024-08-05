@@ -45,7 +45,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route
-        path="/pen"
+        path="/pen/:penId"
         element={<ProjectPage />}
       />
     </Route>

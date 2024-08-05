@@ -1,21 +1,20 @@
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router"
+import { useParams } from "react-router"
 
 // Files
+import Loader from "../components/Loader"
 import Header from "../components/new project page/Header"
 import Layout from "../components/new project page/Layout"
+import useGetSinglePen from "../Hooks/pen/useGetSinglePen"
 
 const ProjectPage = () => {
-  const { project } = useSelector((state) => state.project)
+  const { penId } = useParams()
 
-  const navigate = useNavigate()
+  const { loading, getSinglePen } = useGetSinglePen()
 
   useEffect(() => {
-    if (!project.title) {
-      navigate("/")
-    }
-  }, [project.title])
+    getSinglePen(penId)
+  }, [])
 
   useEffect(() => {
     const unloadWarning = (e) => {
@@ -29,27 +28,16 @@ const ProjectPage = () => {
     return () => window.removeEventListener("beforeunload", unloadWarning)
   }, [])
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.ctrlKey && e.key === "s") {
-        e.preventDefault() // Prevent the default browser save dialog
-        // Your custom logic here
-        console.log("Ctrl+S pressed")
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [])
-
   return (
     <main className="w-screen h-screen flex-col flex items-start justify-start px-3 md:px-6">
-      <Header />
-      <Layout />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header />
+          <Layout />
+        </>
+      )}
     </main>
   )
 }

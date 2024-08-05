@@ -4,12 +4,14 @@ import { configureStore } from "@reduxjs/toolkit"
 import userReducer from "./features/userSlice"
 import toggleReducer from "./features/toggleSlice"
 import projectReducer from "./features/projectSlice"
+import publicPensReducer from "./features/publicPensSlice"
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         project: projectReducer,
-        toggle: toggleReducer
+        toggle: toggleReducer,
+        publicPens: publicPensReducer
     }
 })
 
