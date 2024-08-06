@@ -16,9 +16,7 @@
 }
 
 .wrapper {
-    position: relative;
     overflow: hidden;
-    display: grid;
     align-items: stretch;
 }
 
@@ -30,9 +28,6 @@
     width: calc(400% + 20px);
     height: calc(400% + 20px);
     border: 0;
-    position: absolute;
-    top: -2px;
-    left: -2px;
     transform: scale(.25);
     transform-origin: top left;
 }

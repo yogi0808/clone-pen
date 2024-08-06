@@ -2,8 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const ProjectCard = ({ pen }) => {
-  const code = `<html> <head> <style> ${pen.css} </style> </head> <body> ${pen.html} <script> ${pen.js} </script> </body> </html>`
-
   const colors = [
     "#FFAD60",
     "#A2CA71",
@@ -25,16 +23,7 @@ const ProjectCard = ({ pen }) => {
 
   return (
     <div className="max-h-72 w-fit h-fit bg-b-1 p-3 rounded-md flex flex-col gap-3">
-      <Link
-        to={`/pen/${pen._id}`}
-        className="w-96 aspect-video bg-w overflow-hidden rounded-md scale-95 hover:scale-100 transition-all duration-300 ease-out wrapper"
-      >
-        <iframe
-          srcDoc={code}
-          className="w-full h-full pointer-events-none scaleD"
-        />
-      </Link>
-      <div className="flex gap-2">
+      <div className="flex gap-2 min-w-64">
         <div
           style={{ backgroundColor: bgColor }}
           className="size-12 flex items-center justify-center text-3xl font-semibold rounded-lg uppercase"
@@ -42,7 +31,12 @@ const ProjectCard = ({ pen }) => {
           {pen.username.charAt(0)}
         </div>
         <div>
-          <p className="line-clamp-1">{pen.title}</p>
+          <Link
+            to={`/pen/${pen._id}`}
+            className="line-clamp-1 hover:text-b-2 transition-all duration-300 ease-out"
+          >
+            {pen.title}
+          </Link>
           <p className="text-b-2 text-sm">{pen.username}</p>
         </div>
       </div>
