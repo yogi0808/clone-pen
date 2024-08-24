@@ -31,7 +31,7 @@ const Pen: React.FC = () => {
     </div>
   ) : (
     <div className="h-screen w-full flex flex-col">
-      <HeaderForPen />
+      <HeaderForPen id={penId} />
       <Layout />
     </div>
   )

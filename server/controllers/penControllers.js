@@ -49,3 +49,74 @@ export const getPen = async (req, res) => {
         res.status(500).json({ error: "internal server Error." })
     }
 }
+
+export const preview = async (req, res) => {
+    try {
+
+        const { id } = req.params
+
+        if (!id || !Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Provide valid pen id." })
+        }
+
+        const pen = await Pen.findById(id)
+
+        if (!pen) {
+            return res.status(404).json({ error: "Pen not found." })
+        }
+
+        const code = `<!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${pen.title}</title>
+                    <style>
+                    ${pen.css}
+                    </style>
+                    </head>
+                    <body>
+                    ${pen.html}
+                    <script>
+                        ${pen.js}
+                    </script>
+                    </body>
+                    </html>`
+
+        res.send(code)
+
+    } catch (e) {
+        console.log("Error in preview controller: ", e.message)
+        res.status(500).json({ error: "internal server Error." })
+    }
+}
+
+export const updatePenCode = async (req, res) => {
+    try {
+        const { penId } = req.params
+
+        const { html, css, js } = req.body
+
+        if (!penId || !Types.ObjectId.isValid(penId)) {
+            return res.status(400).json({ error: "Provide valid pen id." })
+        }
+
+        const pen = await Pen.findById(penId)
+
+        if (!pen) {
+            return res.status(404).json({ error: "Pen not found." })
+        }
+
+        await Pen.findByIdAndUpdate(penId, {
+            html,
+            css,
+            js
+        })
+
+        res.status(200).json({ message: "Saved Successfully." })
+
+    } catch (e) {
+        console.log("Error in updatePenCode controller: ", e.message)
+        res.status(500).json({ error: "internal server Error." })
+    }
+}
