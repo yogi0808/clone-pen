@@ -94,7 +94,7 @@ export const preview = async (req, res) => {
 export const updatePenCode = async (req, res) => {
     try {
         const { penId } = req.params
-
+        const user = req.user
         const { html, css, js } = req.body
 
         if (!penId || !Types.ObjectId.isValid(penId)) {
@@ -105,6 +105,10 @@ export const updatePenCode = async (req, res) => {
 
         if (!pen) {
             return res.status(404).json({ error: "Pen not found." })
+        }
+
+        if (user._id.toString() !== pen.user.toString()) {
+            return res.status(400).json({ error: "Your are not the owner of this pen." })
         }
 
         await Pen.findByIdAndUpdate(penId, {

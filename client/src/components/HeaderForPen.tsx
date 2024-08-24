@@ -26,7 +26,6 @@ const HeaderForPen: React.FC<PropsType> = ({ id }) => {
           className="btn !bg-green-600 !text-w hover:!bg-green-700"
         >
           {loading ? "Loading..." : "Save"}
-          Save
         </button>
         <button
           className="btn"
