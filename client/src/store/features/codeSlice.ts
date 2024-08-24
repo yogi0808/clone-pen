@@ -24,7 +24,12 @@ const codeSlice = createSlice({
     initialState,
     reducers: {
         setProject: (state, action: PayloadAction<codeState>) => {
-            state = action.payload;
+            state.id = action.payload.id;
+            state.title = action.payload.title;
+            state.projectType = action.payload.projectType;
+            state.css = action.payload.css;
+            state.html = action.payload.html;
+            state.js = action.payload.js;
         },
         setHtml: (state, action: PayloadAction<string | undefined>) => {
             state.html = action.payload
