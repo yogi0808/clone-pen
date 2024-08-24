@@ -2,12 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit"
 
 interface codeState {
+    id: string
+    title: string
+    projectType: string
     html: string | undefined
     css: string | undefined
     js: string | undefined
 }
 
 const initialState: codeState = {
+    id: "",
+    title: "",
+    projectType: "",
     html: "",
     css: "",
     js: "",
@@ -17,7 +23,7 @@ const codeSlice = createSlice({
     name: "code",
     initialState,
     reducers: {
-        setCode: (state, action: PayloadAction<codeState>) => {
+        setProject: (state, action: PayloadAction<codeState>) => {
             state = action.payload;
         },
         setHtml: (state, action: PayloadAction<string | undefined>) => {
@@ -32,5 +38,5 @@ const codeSlice = createSlice({
     }
 })
 
-export const { setCode, setCss, setHtml, setJs } = codeSlice.actions
+export const { setProject, setCss, setHtml, setJs } = codeSlice.actions
 export default codeSlice.reducer

@@ -10,7 +10,15 @@ const penSchema = new Schema({
         type: String,
         required: true,
     },
-    code: {
+    html: {
+        type: String,
+        default: "",
+    },
+    css: {
+        type: String,
+        default: "",
+    },
+    js: {
         type: String,
         default: "",
     },

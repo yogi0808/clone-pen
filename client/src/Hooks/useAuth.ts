@@ -17,7 +17,7 @@ interface ResponseData {
     user: User
 }
 
-const useAuth = (): AuthHook => {
+const useAuth: () => AuthHook = (): AuthHook => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const dispatch = useDispatch()
