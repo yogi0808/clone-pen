@@ -44,7 +44,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center py-3 md:py-5 bg-p-2 sticky top-0 left-0 px-3 md:px-8">
+      <div className="w-full flex justify-between items-center py-3 md:py-5 bg-p-2 sticky top-0 left-0 px-3 md:px-8  z-[999]">
         <div>
           <NavLink
             to={"/"}
@@ -95,7 +95,7 @@ const Header: React.FC = () => {
       </div>
 
       {isOpen ? (
-        <div className="w-full h-full absolute top-0 left-0 bg-black/50 flex items-center justify-center backdrop-blur">
+        <div className="w-full h-full absolute top-0 left-0 bg-black/50 flex items-center justify-center backdrop-blur z-[999]">
           <form
             onSubmit={handleCreatePen}
             className="min-w-[450px] p-8 rounded-lg bg-black border border-p-4 flex gap-4 flex-col"

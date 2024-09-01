@@ -2,9 +2,15 @@ import { model, Schema } from "mongoose"
 
 const penSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
+        username: {
+            type: String,
+            required: true
+        }
     },
     title: {
         type: String,

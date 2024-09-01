@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import layoutReducer from "./features/layoutSlice"
 import codeReducer from "./features/codeSlice"
 import userReducer from "./features/userSlice"
+import pensReducer from "./features/pensSlice"
 
 export const store = configureStore({
     reducer: {
         layout: layoutReducer,
         code: codeReducer,
         user: userReducer,
+        pens: pensReducer
     },
 })
 

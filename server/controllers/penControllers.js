@@ -13,7 +13,7 @@ export const createPen = async (req, res) => {
 
         const newPen = Pen({
             title,
-            user: user._id,
+            user: { id: user._id, username: user.username },
             projectType
         })
 
@@ -107,7 +107,7 @@ export const updatePenCode = async (req, res) => {
             return res.status(404).json({ error: "Pen not found." })
         }
 
-        if (user._id.toString() !== pen.user.toString()) {
+        if (user._id.toString() !== pen.user.id.toString()) {
             return res.status(400).json({ error: "Your are not the owner of this pen." })
         }
 
@@ -122,5 +122,20 @@ export const updatePenCode = async (req, res) => {
     } catch (e) {
         console.log("Error in updatePenCode controller: ", e.message)
         res.status(500).json({ error: "internal server Error." })
+    }
+}
+
+export const getAllPublicPen = async (req, res) => {
+    try {
+        const pens = await Pen.find({ projectType: "public" }).select(["-html", "-css", "-js", "-projectType"])
+
+        if (!pens) {
+            return rse.status(404).json({ error: "Pens not found." })
+        }
+
+        res.status(200).json(pens)
+    } catch (e) {
+        console.log("Error in getAllPublicPen: ", e.message)
+        res.status(500).json({ error: "Internal server Error." })
     }
 }
